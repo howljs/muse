@@ -1,0 +1,37 @@
+{
+  "name": "muse-project",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/@react-native-async-storage/async-storage",
+      "**/react",
+      "**/react-dom",
+      "**/react-native",
+      "**/react-native/**",
+      "**/react-native-codegen",
+      "**/@react-navigation/**",
+      "**/@callstack/**"
+    ]
+  },
+  "scripts": {
+    "start:host": "yarn workspace muse run start",
+    "run:host:ios": "yarn workspace muse run ios",
+    "run:host:android": "yarn workspace muse run android",
+    "host:pods": "yarn workspace muse run pod_install",
+    "start:mtravel": "yarn workspace mtravel run start:webpack",
+    "run:mtravel:ios": "yarn workspace mtravel run ios",
+    "run:mtravel:android": "yarn workspace mtravel run android",
+    "start:metro:mtravel": "yarn workspace mtravel run start",
+    "mtravel:pods": "yarn workspace mtravel run pod_install",
+    "bootstrap": "yarn && yarn host:pods",
+    "clean": "find ./ -type d -name 'node_modules' -exec rm -rf '{}' +",
+    "start": "concurrently -P 'yarn:start:*(!metro) {1}'"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
